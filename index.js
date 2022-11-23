@@ -1,5 +1,5 @@
 /**
-   * Create By THE JO BOT
+   * Create By GOOD BOY BOT
    * Base by Dika Ardnt
 */
 
@@ -68,82 +68,82 @@ if (global.db) setInterval(async () => {
   }, 30 * 1000)
 
 async function startjobotz() {
-    const jobotz = makeWASocket({
+    const boybotz = makeWASocket({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
-        browser: ['THE JO BOT V3', 'Safari','1.0.0'],
+        browser: ['GOOD BOY BOT V2', 'Safari','1.0.0'],
         auth: state
     })
 
-    store.bind(jobotz.ev)
+    store.bind(boybotz.ev)
     
     // anticall auto block
-    jobotz.ws.on('CB:call', async (json) => {
+    boybotz.ws.on('CB:call', async (json) => {
     const callerId = json.content[0].attrs['call-creator']
     if (json.content[0].tag == 'offer') {
     let pa7rick = await jobotz.sendContact(callerId, global.owner)
-    jobotz.sendMessage(callerId, { text: `Sistem otomatis block!\nJangan menelpon bot!`}, { quoted : pa7rick })
+    boybotz.sendMessage(callerId, { text: `Sistem otomatis block!\nJangan menelpon bot!`}, { quoted : pa7rick })
     await sleep(8000)
-    await jobotz.updateBlockStatus(callerId, "block")
+    await boybotz.updateBlockStatus(callerId, "block")
     }
     })
 
-    jobotz.ev.on('messages.upsert', async chatUpdate => {
+    boybotz.ev.on('messages.upsert', async chatUpdate => {
         //console.log(JSON.stringify(chatUpdate, undefined, 2))
         try {
         mek = chatUpdate.messages[0]
         if (!mek.message) return
         mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
         if (mek.key && mek.key.remoteJid === 'status@broadcast') return
-        if (!jobotz.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
+        if (!boytz.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
         if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
-        m = smsg(jobotz, mek, store)
-        require("./jo")(jobotz, m, chatUpdate, store)
+        m = smsg(boybotz, mek, store)
+        require("./jo")(boybotz, m, chatUpdate, store)
         } catch (err) {
             console.log(err)
         }
     })
     
     // Group Update
-    jobotz.ev.on('groups.update', async pea => {
+    boybotz.ev.on('groups.update', async pea => {
        //console.log(pea)
     // Get Profile Picture Group
        try {
-       ppgc = await jobotz.profilePictureUrl(pea[0].id, 'image')
+       ppgc = await boybotz.profilePictureUrl(pea[0].id, 'image')
        } catch {
        ppgc = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
        }
        let wm_fatih = { url : ppgc }
        if (pea[0].announce == true) {
-       jobotz.send5ButImg(pea[0].id, `「 Group Settings Change 」\n\nGroup telah ditutup oleh admin, Sekarang hanya admin yang dapat mengirim pesan !`, `Group Settings Change Message`, wm_fatih, [])
+       boybotz.send5ButImg(pea[0].id, `「 Group Settings Change 」\n\nGroup telah ditutup oleh admin, Sekarang hanya admin yang dapat mengirim pesan !`, `Group Settings Change Message`, wm_fatih, [])
        } else if(pea[0].announce == false) {
-       jobotz.send5ButImg(pea[0].id, `「 Group Settings Change 」\n\nGroup telah dibuka oleh admin, Sekarang peserta dapat mengirim pesan !`, `Group Settings Change Message`, wm_fatih, [])
+       boybotz.send5ButImg(pea[0].id, `「 Group Settings Change 」\n\nGroup telah dibuka oleh admin, Sekarang peserta dapat mengirim pesan !`, `Group Settings Change Message`, wm_fatih, [])
        } else if (pea[0].restrict == true) {
-       jobotz.send5ButImg(pea[0].id, `「 Group Settings Change 」\n\nInfo group telah dibatasi, Sekarang hanya admin yang dapat mengedit info group !`, `Group Settings Change Message`, wm_fatih, [])
+       boybotz.send5ButImg(pea[0].id, `「 Group Settings Change 」\n\nInfo group telah dibatasi, Sekarang hanya admin yang dapat mengedit info group !`, `Group Settings Change Message`, wm_fatih, [])
        } else if (pea[0].restrict == false) {
-       jobotz.send5ButImg(pea[0].id, `「 Group Settings Change 」\n\nInfo group telah dibuka, Sekarang peserta dapat mengedit info group !`, `Group Settings Change Message`, wm_fatih, [])
+       boybotz.send5ButImg(pea[0].id, `「 Group Settings Change 」\n\nInfo group telah dibuka, Sekarang peserta dapat mengedit info group !`, `Group Settings Change Message`, wm_fatih, [])
        } else {
-       jobotz.send5ButImg(pea[0].id, `「 Group Settings Change 」\n\nGroup Subject telah diganti menjadi *${pea[0].subject}*`, `Group Settings Change Message`, wm_fatih, [])
+       boybotz.send5ButImg(pea[0].id, `「 Group Settings Change 」\n\nGroup Subject telah diganti menjadi *${pea[0].subject}*`, `Group Settings Change Message`, wm_fatih, [])
      }
     })
 
-    jobotz.ev.on('group-participants.update', async (anu) => {
+    boybotz.ev.on('group-participants.update', async (anu) => {
         console.log(anu)
         if (!wlcm.includes(anu.id)) return
         try {
-            let metadata = await jobotz.groupMetadata(anu.id)
+            let metadata = await boybotz.groupMetadata(anu.id)
             let participants = anu.participants
             for (let num of participants) {
                 // Get Profile Picture User
                 try {
-                    pp_user = await jobotz.profilePictureUrl(num, 'image')
+                    pp_user = await boybotz.profilePictureUrl(num, 'image')
                 } catch {
                    var pp_user = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
                 }
 
                 // Get Profile Picture Group
                 try {
-                    ppgroup = await jobotz.profilePictureUrl(anu.id, 'image')
+                    ppgroup = await boybotz.profilePictureUrl(anu.id, 'image')
                 } catch {
                    var ppgroup =  "https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg";
                 }
@@ -163,14 +163,14 @@ async function startjobotz() {
  ▬▭▬▭▬ ✦✧✦ ▬▭▬▭▬
 ╭━━•›〘 SUBSCRIBE 〙
 │➳ Channel YouTube
-│➳ THE JO BOT
-│➳ https://youtube.com/channel/UC-wt99jFVc-zXMkxKRDZ56w
+│➳ GOOD BOY BOT
+│➳ https://youtube.com/channel/UCjVlwguwduOBA6N7ztfFhhw
 ╰━ ━ ━ ━ ━ ━ ━ ━ ━ ━•⩵꙰ཱི࿐
  ▬▭▬▭▬ ✦✧✦ ▬▭▬▭▬
 
-© THE JO BOT
+© GOOD BOY BOT
 `
-                  jobotz.sendMessage(anu.id, { image: { url: pp_user }, contextInfo: { mentionedJid: [num] }, caption: anunya2 })
+                  boybotz.sendMessage(anu.id, { image: { url: pp_user }, contextInfo: { mentionedJid: [num] }, caption: anunya2 })
                 }
             }
         } catch (err) {
@@ -179,7 +179,7 @@ async function startjobotz() {
     })
 	
     // Setting
-    jobotz.decodeJid = (jid) => {
+    boybotz.decodeJid = (jid) => {
         if (!jid) return jid
         if (/:\d+@/gi.test(jid)) {
             let decode = jidDecode(jid) || {}
@@ -187,44 +187,44 @@ async function startjobotz() {
         } else return jid
     }
     
-    jobotz.ev.on('contacts.update', update => {
+    boybotz.ev.on('contacts.update', update => {
         for (let contact of update) {
-            let id = jobotz.decodeJid(contact.id)
+            let id = boybotz.decodeJid(contact.id)
             if (store && store.contacts) store.contacts[id] = { id, name: contact.notify }
         }
     })
 
-    jobotz.getName = (jid, withoutContact  = false) => {
-        id = jobotz.decodeJid(jid)
-        withoutContact = jobotz.withoutContact || withoutContact 
+    boybotz.getName = (jid, withoutContact  = false) => {
+        id = boybotz.decodeJid(jid)
+        withoutContact = boybotz.withoutContact || withoutContact 
         let v
         if (id.endsWith("@g.us")) return new Promise(async (resolve) => {
             v = store.contacts[id] || {}
-            if (!(v.name || v.subject)) v = jobotz.groupMetadata(id) || {}
+            if (!(v.name || v.subject)) v = boybotz.groupMetadata(id) || {}
             resolve(v.name || v.subject || PhoneNumber('+' + id.replace('@s.whatsapp.net', '')).getNumber('international'))
         })
         else v = id === '0@s.whatsapp.net' ? {
             id,
             name: 'WhatsApp'
-        } : id === jobotz.decodeJid(jobotz.user.id) ?
-            jobotz.user :
+        } : id === boybotz.decodeJid(boybotz.user.id) ?
+            boybotz.user :
             (store.contacts[id] || {})
             return (withoutContact ? '' : v.name) || v.subject || v.verifiedName || PhoneNumber('+' + jid.replace('@s.whatsapp.net', '')).getNumber('international')
     }
     
-    jobotz.sendContact = async (jid, kon, quoted = '', opts = {}) => {
+    boybotz.sendContact = async (jid, kon, quoted = '', opts = {}) => {
 	let list = []
 	for (let i of kon) {
 	    list.push({
 	    	displayName: await jobotz.getName(i + '@s.whatsapp.net'),
-	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await jobotz.getName(i + '@s.whatsapp.net')}\nFN:${await jobotz.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:okeae2410@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/cak_haho\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
+	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await boybotz.getName(i + '@s.whatsapp.net')}\nFN:${await boybotz.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:okeae2410@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/cak_haho\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
 	    })
 	}
-	jobotz.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted })
+	botz.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted })
     }
     
-    jobotz.setStatus = (status) => {
-        jobotz.query({
+    boybotz.setStatus = (status) => {
+        boybotz.query({
             tag: 'iq',
             attrs: {
                 to: '@s.whatsapp.net',
@@ -240,27 +240,27 @@ async function startjobotz() {
         return status
     }
 	
-    jobotz.public = true
+    boybotz.public = true
 
-    jobotz.serializeM = (m) => smsg(jobotz, m, store)
+    boybotz.serializeM = (m) => smsg(jobotz, m, store)
 
-    jobotz.ev.on('connection.update', async (update) => {
+    boybotz.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect } = update	    
         if (connection === 'close') {
         let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-            if (reason === DisconnectReason.badSession) { console.log(`Bad Session File, Please Delete Session and Scan Again`); jobotz.logout(); }
-            else if (reason === DisconnectReason.connectionClosed) { console.log("Connection closed, reconnecting...."); startjobotz(); }
-            else if (reason === DisconnectReason.connectionLost) { console.log("Connection Lost from Server, reconnecting..."); startjobotz(); }
-            else if (reason === DisconnectReason.connectionReplaced) { console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First"); jobotz.logout(); }
-            else if (reason === DisconnectReason.loggedOut) { console.log(`Device Logged Out, Please Scan Again And Run.`); jobotz.logout(); }
+            if (reason === DisconnectReason.badSession) { console.log(`Bad Session File, Please Delete Session and Scan Again`); boybotz.logout(); }
+            else if (reason === DisconnectReason.connectionClosed) { console.log("Connection closed, reconnecting...."); startboybotz(); }
+            else if (reason === DisconnectReason.connectionLost) { console.log("Connection Lost from Server, reconnecting..."); startboybotz(); }
+            else if (reason === DisconnectReason.connectionReplaced) { console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First"); boybotz.logout(); }
+            else if (reason === DisconnectReason.loggedOut) { console.log(`Device Logged Out, Please Scan Again And Run.`); boybotz.logout(); }
             else if (reason === DisconnectReason.restartRequired) { console.log("Restart Required, Restarting..."); startjobotz(); }
             else if (reason === DisconnectReason.timedOut) { console.log("Connection TimedOut, Reconnecting..."); startjobotz(); }
-            else jobotz.end(`Unknown DisconnectReason: ${reason}|${connection}`)
+            else boybotz.end(`Unknown DisconnectReason: ${reason}|${connection}`)
         }
         console.log('Connected...', update)
     })
 
-    jobotz.ev.on('creds.update', saveState)
+    boybotz.ev.on('creds.update', saveState)
 
     // Add Other
 
@@ -272,25 +272,25 @@ async function startjobotz() {
       * @param {*} quoted
       * @param {*} options
       */
-     jobotz.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
+     boybotz.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
       let mime = '';
       let res = await axios.head(url)
       mime = res.headers['content-type']
       if (mime.split("/")[1] === "gif") {
-     return jobotz.sendMessage(jid, { video: await getBuffer(url), caption: caption, gifPlayback: true, ...options}, { quoted: quoted, ...options})
+     return boybotz.sendMessage(jid, { video: await getBuffer(url), caption: caption, gifPlayback: true, ...options}, { quoted: quoted, ...options})
       }
       let type = mime.split("/")[0]+"Message"
       if(mime === "application/pdf"){
-     return jobotz.sendMessage(jid, { document: await getBuffer(url), mimetype: 'application/pdf', caption: caption, ...options}, { quoted: quoted, ...options })
+     return boybotz.sendMessage(jid, { document: await getBuffer(url), mimetype: 'application/pdf', caption: caption, ...options}, { quoted: quoted, ...options })
       }
       if(mime.split("/")[0] === "image"){
-     return jobotz.sendMessage(jid, { image: await getBuffer(url), caption: caption, ...options}, { quoted: quoted, ...options})
+     return boybotz.sendMessage(jid, { image: await getBuffer(url), caption: caption, ...options}, { quoted: quoted, ...options})
       }
       if(mime.split("/")[0] === "video"){
-     return jobotz.sendMessage(jid, { video: await getBuffer(url), caption: caption, mimetype: 'video/mp4', ...options}, { quoted: quoted, ...options })
+     return boybotz.sendMessage(jid, { video: await getBuffer(url), caption: caption, mimetype: 'video/mp4', ...options}, { quoted: quoted, ...options })
       }
       if(mime.split("/")[0] === "audio"){
-     return jobotz.sendMessage(jid, { audio: await getBuffer(url), caption: caption, mimetype: 'audio/mpeg', ...options}, { quoted: quoted, ...options })
+     return boybotz.sendMessage(jid, { audio: await getBuffer(url), caption: caption, mimetype: 'audio/mpeg', ...options}, { quoted: quoted, ...options })
       }
       }
 
@@ -304,7 +304,7 @@ async function startjobotz() {
       *@param [*] sections
       *@param {*} quoted
       */
-        jobotz.sendListMsg = (jid, text = '', footer = '', title = '' , butText = '', sects = [], quoted) => {
+        boybotz.sendListMsg = (jid, text = '', footer = '', title = '' , butText = '', sects = [], quoted) => {
         let sections = sects
         var listMes = {
         text: text,
@@ -313,7 +313,7 @@ async function startjobotz() {
         buttonText: butText,
         sections
         }
-        jobotz.sendMessage(jid, listMes, { quoted: quoted })
+        boybotz.sendMessage(jid, listMes, { quoted: quoted })
         }
 
     /** Send Button 5 Message
@@ -324,14 +324,14 @@ async function startjobotz() {
      * @param {*} button
      * @returns 
      */
-        jobotz.send5ButMsg = (jid, text = '' , footer = '', but = []) =>{
+        boybotz.send5ButMsg = (jid, text = '' , footer = '', but = []) =>{
         let templateButtons = but
         var templateMessage = {
         text: text,
         footer: footer,
         templateButtons: templateButtons
         }
-        jobotz.sendMessage(jid, templateMessage)
+        boybotz.sendMessage(jid, templateMessage)
         }
 
     /** Send Button 5 Image
@@ -344,8 +344,8 @@ async function startjobotz() {
      * @param {*} options
      * @returns
      */
-    jobotz.send5ButImg = async (jid , text = '' , footer = '', img, but = [], options = {}) =>{
-        let message = await prepareWAMessageMedia({ image: img }, { upload: jobotz.waUploadToServer })
+    boybotz.send5ButImg = async (jid , text = '' , footer = '', img, but = [], options = {}) =>{
+        let message = await prepareWAMessageMedia({ image: img }, { upload: boybotz.waUploadToServer })
         var template = generateWAMessageFromContent(jid, proto.Message.fromObject({
         templateMessage: {
         hydratedTemplate: {
@@ -356,7 +356,7 @@ async function startjobotz() {
             }
             }
             }), options)
-            jobotz.relayMessage(jid, template.message, { messageId: template.key.id })
+            boybotz.relayMessage(jid, template.message, { messageId: template.key.id })
     }
 
     /** Send Button 5 Video
@@ -369,8 +369,8 @@ async function startjobotz() {
      * @param {*} options
      * @returns
      */
-    jobotz.send5ButVid = async (jid , text = '' , footer = '', vid, but = [], options = {}) =>{
-        let message = await prepareWAMessageMedia({ video: vid }, { upload: jobotz.waUploadToServer })
+    boybotz.send5ButVid = async (jid , text = '' , footer = '', vid, but = [], options = {}) =>{
+        let message = await prepareWAMessageMedia({ video: vid }, { upload: boybotz.waUploadToServer })
         var template = generateWAMessageFromContent(jid, proto.Message.fromObject({
         templateMessage: {
         hydratedTemplate: {
@@ -381,7 +381,7 @@ async function startjobotz() {
             }
             }
             }), options)
-            jobotz.relayMessage(jid, template.message, { messageId: template.key.id })
+            boybotz.relayMessage(jid, template.message, { messageId: template.key.id })
     }
 
     /** Send Button 5 Gif
@@ -394,7 +394,7 @@ async function startjobotz() {
      * @param {*} options
      * @returns
      */
-    jobotz.send5ButGif = async (jid , text = '' , footer = '', gif, but = [], options = {}) =>{
+    boybotz.send5ButGif = async (jid , text = '' , footer = '', gif, but = [], options = {}) =>{
         let message = await prepareWAMessageMedia({ video: gif, gifPlayback: true }, { upload: jobotz.waUploadToServer })
         var template = generateWAMessageFromContent(jid, proto.Message.fromObject({
         templateMessage: {
@@ -406,7 +406,7 @@ async function startjobotz() {
             }
             }
             }), options)
-            jobotz.relayMessage(jid, template.message, { messageId: template.key.id })
+            boybotz.relayMessage(jid, template.message, { messageId: template.key.id })
     }
 
     /**
@@ -418,7 +418,7 @@ async function startjobotz() {
      * @param {*} quoted 
      * @param {*} options 
      */
-    jobotz.sendButtonText = (jid, buttons = [], text, footer, quoted = '', options = {}) => {
+    boybotz.sendButtonText = (jid, buttons = [], text, footer, quoted = '', options = {}) => {
         let buttonMessage = {
             text,
             footer,
@@ -426,7 +426,7 @@ async function startjobotz() {
             headerType: 2,
             ...options
         }
-        jobotz.sendMessage(jid, buttonMessage, { quoted, ...options })
+        boybotz.sendMessage(jid, buttonMessage, { quoted, ...options })
     }
     
     /**
@@ -437,7 +437,7 @@ async function startjobotz() {
      * @param {*} options 
      * @returns 
      */
-    jobotz.sendText = (jid, text, quoted = '', options) => jobotz.sendMessage(jid, { text: text, ...options }, { quoted })
+    boybotz.sendText = (jid, text, quoted = '', options) => jobotz.sendMessage(jid, { text: text, ...options }, { quoted })
 
     /**
      * 
@@ -448,9 +448,9 @@ async function startjobotz() {
      * @param {*} options 
      * @returns 
      */
-    jobotz.sendImage = async (jid, path, caption = '', quoted = '', options) => {
+    boybotz.sendImage = async (jid, path, caption = '', quoted = '', options) => {
 	let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
-        return await jobotz.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted })
+        return await boybotz.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted })
     }
 
     /**
@@ -462,9 +462,9 @@ async function startjobotz() {
      * @param {*} options 
      * @returns 
      */
-    jobotz.sendVideo = async (jid, path, caption = '', quoted = '', gif = false, options) => {
+    boybotz.sendVideo = async (jid, path, caption = '', quoted = '', gif = false, options) => {
         let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
-        return await jobotz.sendMessage(jid, { video: buffer, caption: caption, gifPlayback: gif, ...options }, { quoted })
+        return await boybotz.sendMessage(jid, { video: buffer, caption: caption, gifPlayback: gif, ...options }, { quoted })
     }
 
     /**
@@ -476,9 +476,9 @@ async function startjobotz() {
      * @param {*} options 
      * @returns 
      */
-    jobotz.sendAudio = async (jid, path, quoted = '', ptt = false, options) => {
+   boybotz.sendAudio = async (jid, path, quoted = '', ptt = false, options) => {
         let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
-        return await jobotz.sendMessage(jid, { audio: buffer, ptt: ptt, ...options }, { quoted })
+        return await boybotz.sendMessage(jid, { audio: buffer, ptt: ptt, ...options }, { quoted })
     }
 
     /**
@@ -489,7 +489,7 @@ async function startjobotz() {
      * @param {*} options 
      * @returns 
      */
-    jobotz.sendTextWithMentions = async (jid, text, quoted, options = {}) => jobotz.sendMessage(jid, { text: text, contextInfo: { mentionedJid: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net') }, ...options }, { quoted })
+    boybotz.sendTextWithMentions = async (jid, text, quoted, options = {}) => jobotz.sendMessage(jid, { text: text, contextInfo: { mentionedJid: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net') }, ...options }, { quoted })
 
     /**
      * 
@@ -499,7 +499,7 @@ async function startjobotz() {
      * @param {*} options 
      * @returns 
      */
-    jobotz.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
+    boybotz.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
         if (options && (options.packname || options.author)) {
@@ -508,7 +508,7 @@ async function startjobotz() {
             buffer = await imageToWebp(buff)
         }
 
-        await jobotz.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
+        await boybotz.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
         return buffer
     }
 
@@ -520,7 +520,7 @@ async function startjobotz() {
      * @param {*} options 
      * @returns 
      */
-    jobotz.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
+    boybotz.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
         if (options && (options.packname || options.author)) {
@@ -529,7 +529,7 @@ async function startjobotz() {
             buffer = await videoToWebp(buff)
         }
 
-        await jobotz.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
+        await boybotz.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
         return buffer
     }
 	
@@ -540,7 +540,7 @@ async function startjobotz() {
      * @param {*} attachExtension 
      * @returns 
      */
-    jobotz.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
+    boybotz.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
         let quoted = message.msg ? message.msg : message
         let mime = (message.msg || message).mimetype || ''
         let messageType = message.mtype ? message.mtype.replace(/Message/gi, '') : mime.split('/')[0]
@@ -556,7 +556,7 @@ async function startjobotz() {
         return trueFileName
     }
 
-    jobotz.downloadMediaMessage = async (message) => {
+    boybotz.downloadMediaMessage = async (message) => {
         let mime = (message.msg || message).mimetype || ''
         let messageType = message.mtype ? message.mtype.replace(/Message/gi, '') : mime.split('/')[0]
         const stream = await downloadContentFromMessage(message, messageType)
@@ -578,8 +578,8 @@ async function startjobotz() {
      * @param {*} options 
      * @returns 
      */
-    jobotz.sendMedia = async (jid, path, fileName = '', caption = '', quoted = '', options = {}) => {
-        let types = await jobotz.getFile(path, true)
+    boybotz.sendMedia = async (jid, path, fileName = '', caption = '', quoted = '', options = {}) => {
+        let types = await boybotz.getFile(path, true)
            let { mime, ext, res, data, filename } = types
            if (res && res.status !== 200 || file.length <= 65536) {
                try { throw { json: JSON.parse(file.toString()) } }
@@ -599,7 +599,7 @@ async function startjobotz() {
        else if (/video/.test(mime)) type = 'video'
        else if (/audio/.test(mime)) type = 'audio'
        else type = 'document'
-       await jobotz.sendMessage(jid, { [type]: { url: pathFile }, caption, mimetype, fileName, ...options }, { quoted, ...options })
+       await boybotz.sendMessage(jid, { [type]: { url: pathFile }, caption, mimetype, fileName, ...options }, { quoted, ...options })
        return fs.promises.unlink(pathFile)
        }
 
@@ -611,7 +611,7 @@ async function startjobotz() {
      * @param {*} options 
      * @returns 
      */
-    jobotz.copyNForward = async (jid, message, forceForward = false, options = {}) => {
+    boybotz.copyNForward = async (jid, message, forceForward = false, options = {}) => {
         let vtype
 		if (options.readViewOnce) {
 			message.message = message.message && message.message.ephemeralMessage && message.message.ephemeralMessage.message ? message.message.ephemeralMessage.message : (message.message || undefined)
@@ -642,11 +642,11 @@ async function startjobotz() {
                 }
             } : {})
         } : {})
-        await jobotz.relayMessage(jid, waMessage.message, { messageId:  waMessage.key.id })
+        await boybotz.relayMessage(jid, waMessage.message, { messageId:  waMessage.key.id })
         return waMessage
     }
 
-    jobotz.cMod = (jid, copy, text = '', sender = jobotz.user.id, options = {}) => {
+    boybotz.cMod = (jid, copy, text = '', sender = jobotz.user.id, options = {}) => {
         //let copy = message.toJSON()
 		let mtype = Object.keys(copy.message)[0]
 		let isEphemeral = mtype === 'ephemeralMessage'
@@ -667,7 +667,7 @@ async function startjobotz() {
 		if (copy.key.remoteJid.includes('@s.whatsapp.net')) sender = sender || copy.key.remoteJid
 		else if (copy.key.remoteJid.includes('@broadcast')) sender = sender || copy.key.remoteJid
 		copy.key.remoteJid = jid
-		copy.key.fromMe = sender === jobotz.user.id
+		copy.key.fromMe = sender === boybotz.user.id
 
         return proto.WebMessageInfo.fromObject(copy)
     }
@@ -678,7 +678,7 @@ async function startjobotz() {
      * @param {*} path 
      * @returns 
      */
-    jobotz.getFile = async (PATH, save) => {
+    boybotz.getFile = async (PATH, save) => {
         let res
         let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await getBuffer(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
         //if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
@@ -698,10 +698,10 @@ async function startjobotz() {
 
     }
 
-    return jobotz
+    return boybotz
 }
 
-startjobotz()
+startboybotz()
 
 
 let file = require.resolve(__filename)

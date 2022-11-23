@@ -1,5 +1,5 @@
 /**
-   * Create By THE JO BOT
+   * Create By GOOD BOY BOT
    * Base by Dika Ardnt
 */
 
@@ -17,14 +17,14 @@ global.APIKeys = {
 }
 
 
-global.ownername = 'THE JO BOT'
+global.ownername = 'GOOD BOY BOT'
 global.autorecording = false //status auto merekam ( auto record )
 global.autoketik = false //status auto mengetik (auto typing)
 global.available = false //status online (online)
 // Other
-global.owner = ['60177426853','60177426853','60177426853']
-global.premium = ['60177426853']
-global.packname = 'The Jo Bot'
+global.owner = ['6283152864289','6283152864289','6283152864289']
+global.premium = ['62895368426077']
+global.packname = 'Good Boy Bot'
 global.author = 'WhatsApp Bot'
 global.wlcm = []
 global.sessionName = 'session'
@@ -45,7 +45,7 @@ global.limitawal = {
     premium: "Infinity",
     free: 100
 }
-global.thumb = fs.readFileSync('./lib/jo.jpg')
+global.thumb = fs.readFileSync('./lib/boy.jpg')
 global.visoka = { url: 'https://telegra.ph/file/15209657f9d4f59c7ca1e.mp4' }
 
 let file = require.resolve(__filename)

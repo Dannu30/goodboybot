@@ -1,7 +1,7 @@
 <p align="center">
 	<img src="![image](https://user-images.githubusercontent.com/118490473/203578773-c63c41fe-7ff2-40d3-8f7b-cf6e7bf87ee4.png)" width="35%" style="margin-left: auto;margin-right: auto;display: block;">
 </p>
-<h1 align="center">THE_JO_BOT</h1>
+<h1 align="center">GOODBOYBOT</h1>
 
 Script WhatsApp Bot Multi Device
 

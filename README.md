@@ -1,10 +1,10 @@
-<p align="center">
-	
+# GOODBOYBOT
 
-	
+<img src="![image](https://user-images.githubusercontent.com/118490473/203476437-d622f8fb-204e-459b-8e8f-cf0ba1cdb97f.png) /></>
+</p>
 
-	
 
+<h1 align="center">Hai Kak<img src="https://user-images.githubusercontent.com/1303154/88677602-1635ba80-d120-11ea-84d8-<h1 d26 <h1 3ba5fc3c0.gif" width="40px" alt="hi"><br> Tq Yah Dah Mampir </h1>
 	
 <h1 align="center">GOODBOYBOT</h1>
 
